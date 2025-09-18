@@ -11,12 +11,9 @@ class ProductKeyword:
     def goto_product_page(self, url=product_url):
         self.page.goto(url)
 
-    def add_product_to_cart(self, product_name: str):
-        self.product_page.get_add_to_cart_button(product_name).click()
-
     def add_single_or_multiple_products_to_cart(self, products: list[str]):
         for product in products:
-            self.add_product_to_cart(product)
+            self.product_page.get_add_to_cart_button(product).click()
 
     def get_cart_badge_count(self) -> int:
         badge = self.product_page.locator_cart_badge
@@ -24,5 +21,6 @@ class ProductKeyword:
             return int(badge.inner_text())
         return 0
     
-    def remove_product_from_cart(self, product_name: str):
-        self.product_page.get_remove_from_cart_button(product_name).click()
+    def remove_single_or_multiple_products_from_cart(self, products: str):
+        for product in products:
+            self.product_page.get_remove_from_cart_button(product).click()

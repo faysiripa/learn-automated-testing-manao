@@ -5,8 +5,6 @@ from data.product_data import ProductData
 from page.product_page import ProductLocator
 
 # TC_Product_001 - 002
-import pytest
-
 @pytest.mark.parametrize("products", [
     ProductData.TC_Product_001_test_data,  
     ProductData.TC_Product_002_test_data
@@ -22,5 +20,5 @@ def test_add_products_to_cart(page, products):
     assert count == len(products), f"Expected {len(products)} items in cart, but got {count}"
 
     for product in products:
-        remove_button = product_locator.get_remove_from_cart_button(product_name=product)
+        remove_button = product_locator.get_remove_from_cart_button(product)
         expect(remove_button).to_be_visible()

@@ -19,6 +19,3 @@ class ProductLocator:
             .filter(has_text=product_name)
             .locator("button.btn_inventory", has_text="REMOVE")
     )
-
-
- 

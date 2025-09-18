@@ -7,3 +7,10 @@ class ProductData:
         "Sauce Labs Fleece Jacket",
         "Sauce Labs Onesie"
     ]
+    TC_Product_003_test_data = [
+        "Sauce Labs Backpack",
+        "Sauce Labs Bike Light",
+        "Sauce Labs Bolt T-Shirt",
+        "Sauce Labs Fleece Jacket",
+        "Sauce Labs Onesie"
+    ]
