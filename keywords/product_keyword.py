@@ -24,3 +24,9 @@ class ProductKeyword:
     def remove_single_or_multiple_products_from_cart(self, products: str):
         for product in products:
             self.product_page.get_remove_from_cart_button(product).click()
+
+    def select_sorting(self, sort_type: str):
+        self.product_page.locator_sort_dropdown().select_option(sort_type)
+
+    def get_all_product_names(self) -> list[str]:
+        return self.product_page.locator_product_title.all_inner_text()
