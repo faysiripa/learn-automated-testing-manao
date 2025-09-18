@@ -1,6 +1,6 @@
 class ProductData:
-    single_product = "Test.allTheThings() T-Shirt (Red)"
-    multiple_products = [
+    TC_Product_001_test_data = ["Test.allTheThings() T-Shirt (Red)"]
+    TC_Product_002_test_data = [
         "Sauce Labs Backpack",
         "Sauce Labs Bike Light",
         "Sauce Labs Bolt T-Shirt",
