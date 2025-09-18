@@ -1,6 +1,6 @@
 import pytest
 from data.login_data import valid_login_data, invalid_login_data
-from actions.login_keyword import LoginKeyword, VerifyKeyword
+from keywords.login_keyword import LoginKeyword, VerifyKeyword
 
 # TC_Login_001 - 003
 @pytest.mark.parametrize("data", valid_login_data)

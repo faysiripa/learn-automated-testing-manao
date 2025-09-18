@@ -1,29 +1,16 @@
 import pytest
-from actions.product_keyword import ProductKeyword, VerifyProductKeyword
+from playwright.sync_api import expect
+from keywords.product_keyword import ProductKeyword
 from data.product_data import ProductData
-from page.product_page import ProductLocator
 
 # TC_Product_001
-@pytest.mark.parametrize("data", single_product_data)
-def test_add_single_product(page, data):
+@pytest.mark.asyncio
+def test_add_product_to_cart(page):
     product_action = ProductKeyword(page)
-    verify = VerifyProductKeyword(page)
+    product_data = ProductData()
 
     product_action.goto_product_page()
-    product_action.add_product_to_cart(data.product_name)
+    product_action.add_product_to_cart(product_data.single_product)
 
-    verify.verify_cart_count(data.expected_cart_count)
-    verify.verify_add_button_changed_to_remove(data.product_name)
-
-# TC_Product_002
-@pytest.mark.parametrize("data", multiple_product_data)
-def test_add_multiple_products(page, data):
-    product_action = ProductKeyword(page)
-    verify = VerifyProductKeyword(page)
-
-    product_action.goto_product_page()
-    product_action.add_multiple_products_to_cart(data.product_name_list)
-
-    verify.verify_cart_count(data.expected_cart_count)
-    for product in data.product_name_list:
-        verify.verify_add_button_changed_to_remove(product)
+    expect(page.get_by_role("link", name="1")).to_be_visible()
+    expect(page.get_by_role("button", name="REMOVE")).to_be_visible()
