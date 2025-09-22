@@ -78,3 +78,28 @@ def test_sort_products_Z_to_A(page):
 
     product_names = product_action.get_all_product_names()
     assert product_names == product_data.TC_Sort_Z_to_A_test_data, f"Expected {product_data.TC_Sort_Z_to_A_test_data}, but got {product_names}"
+
+# TC_Product_006 : Sorting by Price (Low to High)
+def test_sort_products_low_to_high(page):
+    product_action = ProductKeyword(page)
+    product_data = ProductData()
+
+    product_action.goto_product_page()
+    product_action.select_sorting("lohi")  # Low → High
+
+    product_names = product_action.get_all_product_names()
+    assert product_names == product_data.TC_Sort_Low_to_High_test_data, \
+        f"Expected {product_data.TC_Sort_Low_to_High_test_data}, but got {product_names}"
+
+
+# TC_Product_007 : Sorting by Price (High to Low)
+def test_sort_products_high_to_low(page):
+    product_action = ProductKeyword(page)
+    product_data = ProductData()
+
+    product_action.goto_product_page()
+    product_action.select_sorting("hilo")  # High → Low
+
+    product_names = product_action.get_all_product_names()
+    assert product_names == product_data.TC_Sort_High_to_Low_test_data, \
+        f"Expected {product_data.TC_Sort_High_to_Low_test_data}, but got {product_names}"
