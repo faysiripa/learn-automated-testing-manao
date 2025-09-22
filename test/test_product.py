@@ -67,3 +67,49 @@ def test_sort_products(page, sort_type, expected):
 
     product_names = product_action.get_all_product_names()
     assert product_names == expected, f"Expected {expected}, but got {product_names}"
+
+# Product Detail 008 : Add from detail (click product name at product list)
+def test_add_from_detail_by_name(page):
+    product_action = ProductKeyword(page)
+    product_data = ProductData()
+
+    product_action.goto_product_page()
+    product_action.goto_product_detail_by_name(product_data.TC_Product_008_test_data)
+    product_action.add_product_from_detail()
+
+    assert product_action.get_cart_badge_count() == 1
+    expect(product_action.product_page.get_detail_remove_button()).to_be_visible()
+
+
+# Product Detail 009 : Add from detail (click product image at product list)
+def test_add_from_detail_by_image(page):
+    product_action = ProductKeyword(page)
+    product_data = ProductData()
+
+    product_action.goto_product_page()
+    product_action.goto_product_detail_by_image(product_data.TC_Product_009_test_data)
+    product_action.add_product_from_detail()
+
+    assert product_action.get_cart_badge_count() == 1
+    expect(product_action.product_page.get_detail_remove_button()).to_be_visible()
+
+
+# Product Detail 010 : Add from detail (via cart page)
+def test_add_from_detail_via_cart(page):
+    product_action = ProductKeyword(page)
+    product_data = ProductData()
+
+    # Step 1: ไปหน้า product
+    product_action.goto_product_page()
+    # Step 2: add product first
+    product_action.add_single_or_multiple_products_to_cart(product_data.TC_Product_010_test_data)
+    # Step 3: ไปหน้า cart
+    product_action.goto_cart_page()
+    # Step 4: click product name inside cart
+    product_action.goto_product_detail_by_name(product_data.TC_Product_010_test_data[0])
+    # Step 5: remove then add again from detail page
+    product_action.remove_product_from_detail()
+    product_action.add_product_from_detail()
+
+    assert product_action.get_cart_badge_count() == 1
+    expect(product_action.product_page.get_detail_remove_button()).to_be_visible()

@@ -16,7 +16,7 @@ class ProductKeyword:
             self.product_page.get_add_to_cart_button(product).click()
 
     def get_cart_badge_count(self) -> int:
-        badge = self.product_page.locator_cart_badge
+        badge = self.product_page.locator_cart_badge_count
         if badge.is_visible():
             return int(badge.inner_text())
         return 0
@@ -31,3 +31,19 @@ class ProductKeyword:
     def get_all_product_names(self) -> list[str]:
         expect(self.product_page.locator_product_title.first).to_be_visible()
         return self.product_page.locator_product_title.all_inner_texts()
+    
+    def goto_product_detail_by_name(self, product_name: str):
+        self.product_page.get_product_link(product_name).click()
+
+    def goto_product_detail_by_image(self, product_name: str):
+        self.product_page.get_product_image(product_name).click()
+
+    def add_product_from_detail(self):
+        self.product_page.get_detail_add_to_cart_button().click()
+
+    def remove_product_from_detail(self):
+        self.product_page.get_detail_remove_button().click()
+
+    def goto_cart_page(self):
+        self.product_page.locator_cart_badge_link.click()
+
