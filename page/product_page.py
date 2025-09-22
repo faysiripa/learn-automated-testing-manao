@@ -7,6 +7,7 @@ class ProductLocator:
         self.locator_sort_dropdown = page.locator(".product_sort_container")
         self.locator_product_title = page.locator(".inventory_item_name")
         self.locator_cart_badge_link = page.locator(".shopping_cart_link")
+        self.locator_back_button = page.locator(".inventory_details_back_button")
 
     def get_add_to_cart_button(self, product_name: str) -> Locator:
         return (

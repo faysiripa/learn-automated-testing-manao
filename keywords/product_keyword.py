@@ -47,3 +47,7 @@ class ProductKeyword:
     def goto_cart_page(self):
         self.product_page.locator_cart_badge_link.click()
 
+    def click_back_to_products(self):
+        self.product_page.locator_back_button.click()
+        
+    

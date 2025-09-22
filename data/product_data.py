@@ -51,10 +51,10 @@ class ProductData:
         ]
     }
 
-    TC_Product_008_test_data = "Test.allTheThings() T-Shirt (Red)"  # click name at product list
-    TC_Product_009_test_data = "Sauce Labs Onesie"                  # click image at product list
-    TC_Product_010_test_data = ["Test.allTheThings() T-Shirt (Red)"]  # click name at cart page
-    TC_Product_011_test_data = "Test.allTheThings() T-Shirt (Red)"  # click name at product 
-    TC_Product_012_test_data = ["Test.allTheThings() T-Shirt (Red)"]  # click name at product 
+    TC_Product_008_test_data = "Test.allTheThings() T-Shirt (Red)"
+    TC_Product_009_test_data = "Sauce Labs Onesie"                  
+    TC_Product_010_test_data = ["Test.allTheThings() T-Shirt (Red)"]
+    TC_Product_011_test_data = "Test.allTheThings() T-Shirt (Red)"
+    TC_Product_012_test_data = "Test.allTheThings() T-Shirt (Red)"  
     
     

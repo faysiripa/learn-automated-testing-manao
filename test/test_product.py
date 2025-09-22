@@ -140,6 +140,17 @@ def test_remove_from_cart_page(page):
     assert product_action.get_cart_badge_count() == 0
     expect(product_action.product_page.get_detail_add_to_cart_button()).to_be_visible()
 
+# TC_Product_13 : Clicking on "Back" to Product List
+def test_back_to_product_list(page):
+    product_action = ProductKeyword(page)
+    product_data = ProductData()
+    
+    product_action.goto_product_page()
+    product_action.goto_product_detail_by_name(product_data.TC_Product_012_test_data)
+    product_action.click_back_to_products()
+
+    assert page.url == product_action.product_url, f"Expected {product_action.product_url}, but got {page.url}"
+
 
 
     
