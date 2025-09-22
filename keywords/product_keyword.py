@@ -1,4 +1,4 @@
-from playwright.sync_api import Page
+from playwright.sync_api import Page, expect
 from page.product_page import ProductLocator
 
 class ProductKeyword:
@@ -26,7 +26,8 @@ class ProductKeyword:
             self.product_page.get_remove_from_cart_button(product).click()
 
     def select_sorting(self, sort_type: str):
-        self.product_page.locator_sort_dropdown().select_option(sort_type)
+        self.product_page.locator_sort_dropdown.select_option(sort_type)
 
     def get_all_product_names(self) -> list[str]:
-        return self.product_page.locator_product_title.all_inner_text()
+        expect(self.product_page.locator_product_title.first).to_be_visible()
+        return self.product_page.locator_product_title.all_inner_texts()
