@@ -57,49 +57,13 @@ def test_remove_products_from_cart(page):
         add_button = product_locator.get_add_to_cart_button(product)
         expect(add_button).to_be_visible()
 
-# TC_Product_004 : Sorting by Name (A to Z)
-def test_sort_products_A_to_Z(page):
+# TC_Product_004 - 007
+@pytest.mark.parametrize("sort_type,expected", ProductData.sorting_test_data.items())
+def test_sort_products(page, sort_type, expected):
     product_action = ProductKeyword(page)
-    product_data = ProductData()
 
     product_action.goto_product_page()
-    product_action.select_sorting("az")  # Name (A to Z)
+    product_action.select_sorting(sort_type)
 
     product_names = product_action.get_all_product_names()
-    assert product_names == product_data.TC_Sort_A_to_Z_test_data, f"Expected {product_data.TC_Sort_A_to_Z_test_data}, but got {product_names}"
-
-# TC_Product_005 : Sorting by Name (Z to A)
-def test_sort_products_Z_to_A(page):
-    product_action = ProductKeyword(page)
-    product_data = ProductData()
-
-    product_action.goto_product_page()
-    product_action.select_sorting("za")  # Name (Z to A)
-
-    product_names = product_action.get_all_product_names()
-    assert product_names == product_data.TC_Sort_Z_to_A_test_data, f"Expected {product_data.TC_Sort_Z_to_A_test_data}, but got {product_names}"
-
-# TC_Product_006 : Sorting by Price (Low to High)
-def test_sort_products_low_to_high(page):
-    product_action = ProductKeyword(page)
-    product_data = ProductData()
-
-    product_action.goto_product_page()
-    product_action.select_sorting("lohi")  # Low → High
-
-    product_names = product_action.get_all_product_names()
-    assert product_names == product_data.TC_Sort_Low_to_High_test_data, \
-        f"Expected {product_data.TC_Sort_Low_to_High_test_data}, but got {product_names}"
-
-
-# TC_Product_007 : Sorting by Price (High to Low)
-def test_sort_products_high_to_low(page):
-    product_action = ProductKeyword(page)
-    product_data = ProductData()
-
-    product_action.goto_product_page()
-    product_action.select_sorting("hilo")  # High → Low
-
-    product_names = product_action.get_all_product_names()
-    assert product_names == product_data.TC_Sort_High_to_Low_test_data, \
-        f"Expected {product_data.TC_Sort_High_to_Low_test_data}, but got {product_names}"
+    assert product_names == expected, f"Expected {expected}, but got {product_names}"
