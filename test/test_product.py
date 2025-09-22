@@ -9,7 +9,7 @@ from page.product_page import ProductLocator
     ProductData.TC_Product_001_test_data,   # TC_Product_001 : Add a product to cart
     ProductData.TC_Product_002_test_data    # TC_Product_002 : Add multiple products to cart
 ])
-def test_add_products_to_cart(page, products):
+def test_add_products_at_product_list(page, products):
     product_action = ProductKeyword(page)
     product_locator = ProductLocator(page)
 
@@ -24,7 +24,7 @@ def test_add_products_to_cart(page, products):
         expect(remove_button).to_be_visible()
 
 # TC_Product_003 : Remove products from cart until 0
-def test_remove_products_from_cart(page):
+def test_remove_products_at_product_list(page):
     product_action = ProductKeyword(page)
     product_data = ProductData()
     product_locator = ProductLocator(page)
@@ -68,7 +68,7 @@ def test_sort_products(page, sort_type, expected):
     product_names = product_action.get_all_product_names()
     assert product_names == expected, f"Expected {expected}, but got {product_names}"
 
-# Product Detail 008 : Add from detail (click product name at product list)
+# TC_Product_008 : Add from detail (click product name at product list)
 def test_add_from_detail_by_name(page):
     product_action = ProductKeyword(page)
     product_data = ProductData()
@@ -81,7 +81,7 @@ def test_add_from_detail_by_name(page):
     expect(product_action.product_page.get_detail_remove_button()).to_be_visible()
 
 
-# Product Detail 009 : Add from detail (click product image at product list)
+# TC_Product_009 : Add from detail (click product image at product list)
 def test_add_from_detail_by_image(page):
     product_action = ProductKeyword(page)
     product_data = ProductData()
@@ -94,7 +94,7 @@ def test_add_from_detail_by_image(page):
     expect(product_action.product_page.get_detail_remove_button()).to_be_visible()
 
 
-# Product Detail 010 : Add from detail (via cart page)
+# TC_Product_010 : Add from detail (via cart page)
 def test_add_from_detail_via_cart(page):
     product_action = ProductKeyword(page)
     product_data = ProductData()
@@ -113,3 +113,34 @@ def test_add_from_detail_via_cart(page):
 
     assert product_action.get_cart_badge_count() == 1
     expect(product_action.product_page.get_detail_remove_button()).to_be_visible()
+
+# TC_Product_11 : Remove product from cart by clicking from product detail
+def test_remove_from_details(page):
+    product_action = ProductKeyword(page)
+    product_data = ProductData()
+
+    product_action.goto_product_page()
+    product_action.goto_product_detail_by_name(product_data.TC_Product_011_test_data)
+    product_action.add_product_from_detail()
+    assert product_action.get_cart_badge_count() == 1
+    product_action.remove_product_from_detail()
+    expect(product_action.product_page.get_detail_add_to_cart_button()).to_be_visible()
+
+# TC_Product_12 : Remove product from cart by clicking from cart
+def test_remove_from_cart_page(page):
+    product_action = ProductKeyword(page)
+    product_data = ProductData()
+
+    product_action.goto_product_page()
+    product_action.add_single_or_multiple_products_to_cart(product_data.TC_Product_012_test_data)
+    product_action.goto_cart_page()
+    product_action.goto_product_detail_by_name(product_data.TC_Product_012_test_data[0])
+    product_action.remove_product_from_detail()
+
+    assert product_action.get_cart_badge_count() == 0
+    expect(product_action.product_page.get_detail_add_to_cart_button()).to_be_visible()
+
+
+
+    
+
